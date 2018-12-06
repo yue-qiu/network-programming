@@ -18,5 +18,5 @@ class Server:
                 self.server_socket.sendto(respond_message.encode(), address)
 
 
-server = Server("127.0.0.1", 9999)
+server = Server("0.0.0.0", 9999)
 server.start()

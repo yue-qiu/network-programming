@@ -14,6 +14,7 @@ class Server:
     def start(self):
         while True:
             print("server is running")
+            # 创建 TCP 套接字，所有 （源IP， 源port， 目的IP， 目的port）相同的 TCP 报文会被送到同一个 socket
             sock, addr = self.server_socket.accept()
             t = threading.Thread(target=Server.response, args=(sock, addr))
             t.start()
@@ -35,5 +36,5 @@ class Server:
         print("connection from %s has closed" % (addr, ))
 
 
-server = Server("127.0.0.1", 9999)
+server = Server("0.0.0.0", 9999)
 server.start()
