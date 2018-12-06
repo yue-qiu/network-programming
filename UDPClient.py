@@ -2,13 +2,13 @@ from socket import *
 
 
 class Client:
-    def __init__(self, host, serverport):
+    def __init__(self, host, port):
         self.host = host
-        self.serverport = serverport
+        self.target_port = port
         self.client_socket = socket(AF_INET, SOCK_DGRAM)
 
     def send(self, message):
-        self.client_socket.sendto(message, (self.host, self.serverport))
+        self.client_socket.sendto(message, (self.host, self.target_port))
 
     def receive(self):
         rec_message, address = self.client_socket.recvfrom(2048)
@@ -25,5 +25,6 @@ while True:
         client.send(msg.encode())
         client.receive()
     else:
+        client.close()
         break
 

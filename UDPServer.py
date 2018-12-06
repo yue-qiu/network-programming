@@ -4,9 +4,9 @@ from socket import *
 class Server:
     def __init__(self, host, port):
         self.host = host
-        self.serverport = port
+        self.server_port = port
         self.server_socket = socket(AF_INET, SOCK_DGRAM)
-        self.server_socket.bind((self.host, self.serverport))
+        self.server_socket.bind((self.host, self.server_port))
 
     def start(self):
         while True:
