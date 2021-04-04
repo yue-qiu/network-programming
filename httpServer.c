@@ -9,6 +9,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <assert.h>
+#include <fcntl.h>
 
 const int BUFFER_SIZE = 2048;
 const int MAX_EVENTS_NUM = 1024;
@@ -122,6 +123,9 @@ void addfd(int epoll_fd, int fd, int enbale_et) {
     event.events = EPOLLIN;
     if (enbale_et) {
         event.events |= EPOLLET;
+        int old_option = fcntl(fd, F_GETFL);
+        int new_option = old_option | O_NONBLOCK;
+        fcntl(fd, F_SETFL, new_option);
     }
     epoll_ctl(epoll_fd, EPOLL_CTL_ADD, fd, &event);
 }
